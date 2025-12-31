@@ -319,6 +319,12 @@ const commonElementArray = (arr1, arr2) => {
 //   }
 // }
 
+// Polyfill of array includes method:-
+Array.prototype.myIncludes = function (value) {
+  const arr = this;
+  return arr.indexOf(value) !== -1;
+};
+
 // polyfill of function bind method:-
 Function.prototype.myBind = function (...args1) {
   const func = this;
@@ -329,11 +335,19 @@ Function.prototype.myBind = function (...args1) {
   };
 };
 
-// Polyfill of array includes method:-
-Array.prototype.myIncludes = function (value) {
-  const arr = this;
-  return arr.indexOf(value) !== -1;
-};
+// polyfill of array map method:-
+if (!Array.prototype.map) {
+  Array.prototype.myMap = function (callback) {
+    const context = this;
+    const returnedArray = new Array(context.length);
+    for (let i = 0; i < context.length; i++) {
+      if (i in context) {
+        returnedArray[i] = callback(context[i], i, context);
+      }
+    }
+    return returnedArray;
+  };
+}
 
 // an array example:-
 const grouparray = (arr, n) => {
