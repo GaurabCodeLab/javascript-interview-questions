@@ -493,3 +493,44 @@ const sum = (val) => {
 };
 
 console.log(sum(1)(2)(3)(4)());
+
+// findout first non-repeating character
+const char = "capgeminic";
+
+const requiredFunc = (char)=>{
+    let count = 0;
+    for(let i=0; i<char.length; char++){
+        for(let j=0; j<char.length; char++){
+            if(char[i]===char[j]){
+                count++
+            }
+            if(count===1){
+                return char[i];
+            }
+        }
+    }
+};
+
+console.log(requiredFunc(char));
+
+// one question:-
+const arr = [1,2,3,3,3,2,1];
+
+const requiredObj = (arr)=>{
+    let count = 0;
+    let obj = {};
+    for(let i=0; i<arr.length; i++){
+    for(let j=0; j<arr.length; j++){
+        if(arr[i]===arr[j]){
+            count++
+        }
+    }
+    if(!obj[arr[i]]){
+        obj = {...obj, [arr[i]]: count};
+    }
+    count = 0;
+}
+ return obj
+}
+
+console.log(requiredObj(arr))  // { '1': 2, '2': 2, '3': 3 }
